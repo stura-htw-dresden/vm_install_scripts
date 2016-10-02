@@ -3,7 +3,7 @@ STEAM_HOME=$HOME/server/steam
 cd $STEAM_HOME
 ./steamcmd.sh +login anonymous +force_install_dir ./csgo +app_update 740 +quit
 
-mv $STEAM_HOME/csgo/cfg/server.cfg server/csgo/cfg/server.cfg.old
+mv $STEAM_HOME/csgo/csgo/cfg/server.cfg $STEAM_HOME/csgo/csgo/cfg/server.cfg.old
 
 cat <<<"
 sm plugins unload_all
@@ -19,7 +19,7 @@ tv_enable 1
 tv_delay 120
 tv_autorecord 1 // wird im csgo ordner unter <name der karte>.dem abgelegt
 # den Rest löschen
-" > $STEAM_HOME/csgo/cfg/server.cfg
+" > $STEAM_HOME/csgo/csgo/cfg/server.cfg
 
 
 cd $STEAM_HOME/csgo

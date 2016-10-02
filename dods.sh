@@ -6,7 +6,7 @@ cd $DODS_HOME
 
 wget -c http://gameservermanagers.com/dl/dodsserver
 chmod +x dodsserver
-./dodsserver install
+su -c './dodsserver install'
 
 echo -e "
 Server starten
