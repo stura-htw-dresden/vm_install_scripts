@@ -1,4 +1,9 @@
 #! /bin/bash
+
+echo -e "Download link deprecated"
+
+exit 1
+
 export SERVER_HOME=$HOME/server
 DODS_HOME=$SERVER_HOME/dods
 mkdir -p $DODS_HOME
