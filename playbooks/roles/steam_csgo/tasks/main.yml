@@ -1,0 +1,36 @@
+---
+- name: Install CSGO
+  shell: "{{ steamcmd_exe }} {{ csgo_steamcmd_args }}"
+
+- name: install server.cfg
+  template:
+          backup: true
+          src: server.cfg.j2
+          dest: "{{ csgo_server_cfg }}"
+
+- name: download extra packages
+  get_url:
+          url: "{{ item }}"
+          dest: "{{ CSGO_HOME }}/"
+  with_items: "{{csgo_extras }}"
+
+- name: unarchive extra packages
+  unarchive:
+          remote_src: ture
+          src: "{{ CSGO_HOME }}/{{ item | basename }}"
+          dest: "{{ CSGO_HOME }}"
+  with_items: "{{csgo_extras}}"
+
+- say:
+        msg: '
+        vim addons/sourcemod/configs/pugsetup/maps.txt
+
+        TIP: # lösche de_nuke 2015-12-04
+
+        Server starten
+
+        cd $HOME/steam/server/csgo
+        tmux
+        ./srcds_run -game csgo -usercon -console -tickrate 64\
+           +game_type 0 +game_mode 1 +map de_dust2 +exec server.cfg
+        '

@@ -1,0 +1,10 @@
+---
+CSGO_HOME: "{{ STEAM_HOME }}/csgo"
+csgo_steamcmd_args: +login anonymous +force_install_dir "{{ CSGO_HOME }}" +app_update "{{ csgo_app_update }}" +quit
+csgo_app_update: 740
+csgo_server_cfg: "{{ STEAM_HOME }}/csgo/csgo/cfg/server.cfg"
+csgo_rcon_password: geheim
+csgo_extras:
+        - http://www.sourcemod.net/smdrop/1.7/sourcemod-1.7.3-git5275-linux.tar.gz
+        - https://metamodsource.net/downloads/mmsource-1.10.6-linux.tar.gz/2
+        - https://github.com/splewis/csgo-pug-setup/releases/download/1.4.2/pugsetup_1.4.2.zip

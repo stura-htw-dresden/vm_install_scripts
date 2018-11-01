@@ -1,0 +1,26 @@
+---
+- name: download steamcmd
+  get_url:
+          url: "{{ steamcmd_url }}"
+          dest: "{{ STEAM_HOME }}"
+          mode: 0660
+
+- name: unarchive "{{ steamcmd_archive }}"
+  unarchive:
+          src: "{{ STEAM_HOME }}/{{ steamcmd_archive }}"
+          dest: "/tmp/"
+          remote_src: yes
+
+- name: mv "/tmp/{{ steamcmd_bin }}" "{{ STEAM_HOME }}/{{ steamcmd_bin }}"
+  synchronize:
+          src: "/tmp/{{ steamcmd_bin }}"
+          dest: "{{ STEAM_HOME }}/{{ steamcmd_bin }}"
+          archive: no
+  delegate_to: "{{ inventory_hostname }}"
+- name: mv "/tmp/linux32" "{{ STEAM_HOME }}/linux32"
+  synchronize:
+          src: "/tmp/linux32"
+          dest: "{{ STEAM_HOME }}/"
+          recursive: yes
+          archive: no
+  delegate_to: "{{ inventory_hostname }}"

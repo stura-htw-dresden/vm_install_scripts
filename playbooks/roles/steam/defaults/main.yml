@@ -1,0 +1,5 @@
+---
+steamcmd_url: "http://media.steampowered.com/client/{{ steamcmd_archive }}"
+steamcmd_archive: steamcmd_linux.tar.gz
+steamcmd_bin: steamcmd.sh
+steamcmd_exe: "{{ STEAM_HOME }}/{{ steamcmd_bin }}"
