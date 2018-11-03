@@ -6,5 +6,5 @@ csgo_server_cfg: "{{ CSGO_HOME }}/csgo/cfg/server.cfg"
 csgo_rcon_password: geheim
 csgo_extras:
         - http://www.sourcemod.net/smdrop/1.7/sourcemod-1.7.3-git5275-linux.tar.gz
-        - https://metamodsource.net/downloads/mmsource-1.10.6-linux.tar.gz/2
         - https://github.com/splewis/csgo-pug-setup/releases/download/1.4.2/pugsetup_1.4.2.zip
+        - https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git966-linux.tar.gz
