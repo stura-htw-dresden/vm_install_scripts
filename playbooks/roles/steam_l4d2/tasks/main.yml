@@ -1,0 +1,31 @@
+---
+- name: Install CSGO
+  shell: "{{ steamcmd_exe }} {{ l4d2_steamcmd_args }}"
+
+- name: install server.cfg
+  template:
+          backup: true
+          src: server.cfg.j2
+          dest: "{{ l4d2_server_cfg }}"
+
+          #- name: download extra packages
+          #  get_url:
+          #          url: "{{ item }}"
+          #          dest: "{{ L4D2_HOME }}/"
+          #  with_items: "{{ l4d2_extras }}"
+
+          #- name: unarchive extra packages
+          #  unarchive:
+          #          remote_src: ture
+          #          src: "{{ CSGO_HOME }}/{{ item | basename }}"
+          #          dest: "{{ CSGO_HOME }}"
+          #  with_items: "{{csgo_extras}}"
+
+- say:
+        msg: '
+        Server starten
+
+        cd $HOME/steam/server/l4d2
+        tmux
+        ./srcds_run -game l4d2 -usercon -console +exec server.cfg
+        '

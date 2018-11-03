@@ -1,0 +1,10 @@
+---
+L4D2_HOME: "{{ STEAM_HOME }}/l4d2"
+l4d2_steamcmd_args: +login anonymous +force_install_dir "{{ L4D2_HOME }}" +app_update "{{ l4d2_app_update }}" +quit
+l4d2_app_update: 222860
+l4d2_server_cfg: "{{ L4D2_HOME }}/left4dead2/cfg/server.cfg"
+l4d2_rcon_password: geheim
+l4d2_extras:
+        - http://www.sourcemod.net/smdrop/1.7/sourcemod-1.7.3-git5275-linux.tar.gz
+        - https://metamodsource.net/downloads/mmsource-1.10.6-linux.tar.gz/2
+        - https://github.com/splewis/csgo-pug-setup/releases/download/1.4.2/pugsetup_1.4.2.zip
