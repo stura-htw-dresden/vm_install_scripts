@@ -13,13 +13,15 @@
           #          url: "{{ item }}"
           #          dest: "{{ L4D2_HOME }}/"
           #  with_items: "{{ l4d2_extras }}"
+          #  ignore_errors: true
 
           #- name: unarchive extra packages
           #  unarchive:
-          #          remote_src: ture
+          #          remote_src: true
           #          src: "{{ CSGO_HOME }}/{{ item | basename }}"
           #          dest: "{{ CSGO_HOME }}"
           #  with_items: "{{csgo_extras}}"
+          #  ignore_errors: true
 
 - say:
         msg: '
