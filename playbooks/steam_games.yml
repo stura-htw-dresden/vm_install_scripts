@@ -16,3 +16,4 @@
   roles:
         - role: steam
         - role: steam_csgo
+        - role: steam_l4d2
