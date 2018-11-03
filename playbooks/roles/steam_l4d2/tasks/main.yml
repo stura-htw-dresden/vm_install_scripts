@@ -29,5 +29,5 @@
 
         cd $HOME/steam/server/l4d2
         tmux
-        ./srcds_run -game l4d2 -usercon -console +exec server.cfg
+        ./srcds_run -usercon -console -game left4dead2 +port 27020 +maxplayers 8 +exec server.cfg +map c2m1_highway
         '
