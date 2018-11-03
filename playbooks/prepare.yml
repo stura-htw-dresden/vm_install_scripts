@@ -24,3 +24,4 @@
                   - libstdc++6:i386
                   - curl
                   - winbind
+                  - espeak
