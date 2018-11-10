@@ -13,7 +13,20 @@
           with_items:
                   - "{{ SERVER_HOME }}"
                   - "{{ STEAM_HOME }}"
+
+        - name: filesystem
+          filesystem:
+                  dev: /dev/sdb1
+                  fstype: ext3
+
+        - name: mount server disk
+          mount:
+                  path: "{{ SERVER_HOME }}"
+                  src: /dev/sdb1
+                  opts: "rw,defaults,exec"
+                  fstype: auto
+                  state: mounted
   roles:
-        - role: steam
-        - role: steam_csgo
-        - role: steam_l4d2
+       - role: steam
+       - role: steam_csgo
+       - role: steam_l4d2
