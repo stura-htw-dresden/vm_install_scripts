@@ -1,5 +1,5 @@
 ---
-- name: Install CSGO
+- name: Install Left 4 Dead 2
   shell: "{{ steamcmd_exe }} {{ l4d2_steamcmd_args }}"
 
 - name: install server.cfg
