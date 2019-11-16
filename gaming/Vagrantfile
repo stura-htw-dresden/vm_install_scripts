@@ -38,12 +38,16 @@ Vagrant.configure("2") do |config|
   # Bridged networks make the machine appear as another physical device on
   # your network.
   # config.vm.network "public_network"
+  config.vm.network "public_network", ip: "10.56.50.2", bridge: "igb0"
+  config.vm.provision "shell",
+    run: "always",
+    inline: "route add default gw 10.56.50.254"
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  # config.vm.synced_folder "../data", "/vagrant_data"
+  config.vm.synced_folder "../", "/vagrant"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -56,12 +60,12 @@ Vagrant.configure("2") do |config|
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
   #
-  file_to_disk = './large_disk.vdi'
+  	file_to_disk = './large_disk.vdi'
 
-  unless File.exist?(file_to_disk)
-      vb.customize ['createhd', '--filename', file_to_disk, '--size', 50 * 1024]
-  end
-  vb.customize ['storageattach', :id, '--storagectl', 'IDE Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
+  	unless File.exist?(file_to_disk)
+  	    vb.customize ['createhd', '--filename', file_to_disk, '--size', 50 * 1024]
+  	end
+  	vb.customize ['storageattach', :id, '--storagectl', 'IDE Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', file_to_disk]
 
   end
   #
@@ -77,10 +81,12 @@ Vagrant.configure("2") do |config|
   # SHELL
   config.vm.provision :shell, path: "create_disk.sh"
 
-  config.vm.provision "ansible" do |ansible|
-	  ansible.playbook = "../playbooks/prepare.yml"
+  config.vm.provision "ansible_local" do |ansible|
+	  ansible.playbook = "./playbooks/prepare.yml"
+	  ansible.install = true
   end
-  config.vm.provision "ansible" do |ansible|
-	  ansible.playbook = "../playbooks/steam_games.yml"
+
+  config.vm.provision "ansible_local" do |ansible|
+	  ansible.playbook = "./playbooks/steam_games.yml"
   end
 end
