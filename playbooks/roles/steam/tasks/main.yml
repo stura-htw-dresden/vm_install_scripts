@@ -2,7 +2,7 @@
 - name: download steamcmd
   get_url:
           url: "{{ steamcmd_url }}"
-          dest: "{{ STEAM_HOME }}"
+          dest: "{{ STEAM_HOME }}/{{ steamcmd_archive }}"
           mode: 0660
 
 - name: unarchive "{{ steamcmd_archive }}"
