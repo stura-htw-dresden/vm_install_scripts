@@ -4,12 +4,13 @@
   vars:
           - SERVER_HOME: "{{ ansible_env['HOME'] }}/server"
           - STEAM_HOME: "{{ SERVER_HOME }}/steam"
-          - elektrixx_version: Iota
+          - elektrixx_version: Kappa
   pre_tasks:
         - name: create install directory
           file:
                   path: "{{ item }}"
                   state: directory
+                  force: true
           with_items:
                   - "{{ SERVER_HOME }}"
                   - "{{ STEAM_HOME }}"
@@ -21,7 +22,7 @@
 
         - name: mount server disk
           mount:
-                  path: "{{ SERVER_HOME }}"
+                  name: "{{ SERVER_HOME }}"
                   src: /dev/sdb1
                   opts: "rw,defaults,exec"
                   fstype: auto
