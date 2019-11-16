@@ -23,7 +23,7 @@
           #  with_items: "{{csgo_extras}}"
           #  ignore_errors: true
 
-- say:
+- debug:
         msg: '
         Server starten
 
