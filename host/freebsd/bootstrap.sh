@@ -31,6 +31,27 @@ nat on $ext_if from $electrixx_net to any -> ($ext_if)
 EOPFCFG
 
 ### dhcpd.conf
+cat << EODHCPDCFG > /etc/pf.conf
+option subnet-mask 255.255.255.0;
+#option domain-name "fugue.com";
+#option domain-name-servers toccata.fugue.com;
+
+max-lease-time 3600;
+default-lease-time 3600;
+
+subnet 10.56.50.0 netmask 255.255.255.0 {
+  range 10.56.50.100 10.56.50.250;
+  option domain-name-servers 10.56.50.254, 141.56.1.2;
+  option broadcast-address 10.56.50.255;
+  option routers 10.56.50.254;
+}
+
+
+host electrixx-gameserver {
+  hardware ethernet a0:36:9f:3c:68:60;
+  server-name "electrixx-gameserver";
+}
+EODHCPDCFG
 
 ### VirtualBox setup
 echo 'vboxdrv_load="YES"' | tee -a /boot/loader.conf
