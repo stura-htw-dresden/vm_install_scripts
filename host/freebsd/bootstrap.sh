@@ -16,6 +16,20 @@ sysrc pf_rules="/etc/pf.conf"
 sysrc pflog_enable="YES"
 sysrc gateway_enable="YES"
 
+
+### pf.conf
+cat << EOPFCFG > /etc/pf.conf
+ext_if="em0"
+int0_if="igb0"
+int1_if="igb1"
+electrixx_net=$int1_if:network
+#net51="$ext_if:141.56.51.0/24"
+
+#pass in on $int1_if from $electrixx_net to $net51 keep state
+#pass out on $ext_if from $electrixx_net to $net51 keep state
+nat on $ext_if from $electrixx_net to any -> ($ext_if)
+EOPFCFG
+
 ### dhcpd.conf
 
 ### VirtualBox setup
