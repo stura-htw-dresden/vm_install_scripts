@@ -1,0 +1,44 @@
+---
+
+- name: check if murmurd is already installed.
+  stat:
+    path: /usr/sbin/murmurd
+  register: murmurd_installed
+
+- name: ensure required packages are present
+  apt:
+    pkg: mumble-server
+    cache_valid_time: 3600
+
+- name: generate the Murmur config file
+  template:
+    src: "mumble-server.ini.j2"
+    dest: "/etc/mumble-server.ini"
+    owner: root
+    group: mumble-server
+    mode: 0640
+  notify: restart murmur
+
+- name: ensure mumble owns key
+  file:
+    path: "{{ murmur_sslkey }}"
+    owner: root
+    group: mumble-server
+    mode: 0640
+  notify: restart murmur
+
+- name: always start service
+  service:
+    name: mumble-server
+    enabled: True
+    state: started
+
+- name: write superuser password to a file
+  copy:
+    content: "{{ murmur_superuser_password }}"
+    dest: /etc/mumble-superuser
+    owner: root
+    group: root
+    mode: 0600
+  when: murmur_superuser_password is defined
+  notify: set superuser password

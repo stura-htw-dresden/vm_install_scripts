@@ -1,0 +1,41 @@
+---
+
+- name: install dependencies
+  apt:
+    pkg: websockify
+
+- name: install mumble-web
+  npm:
+    name: mumble-web
+    global: True
+
+- name: copy mumble-web unit file
+  template:
+    src: mumble-web.service.j2
+    dest: /etc/systemd/system/mumble-web.service
+    owner: root
+    group: root
+    mode: 0644
+  register: servicefile
+  notify: restart mumble-web
+
+- name: Allow to python to inherit socket binding capability
+  capabilities:
+    path: /usr/bin/python2.7
+    capability: cap_net_bind_service=ei
+  when: servicefile.changed
+
+- name: configure mumble-web
+  template:
+    src: config.local.js.j2
+    dest: "{{ mumble_web_path }}/dist/config.local.js"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: enable and start mumble-web
+  systemd:
+    name: mumble-web
+    daemon-reload: yes
+    enabled: True
+    state: started

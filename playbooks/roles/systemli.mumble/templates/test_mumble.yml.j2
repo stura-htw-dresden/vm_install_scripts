@@ -1,0 +1,24 @@
+---
+
+package:
+  mumble-server:
+    installed: true
+service:
+  mumble-server:
+    enabled: true
+    running: true
+process:
+  murmurd:
+    running: true
+port:
+  tcp6:64738:
+    listening: true
+group:
+  mumble-server:
+    exists: true
+user:
+  mumble-server:
+    exists: true
+    groups:
+    - mumble-server
+    home: /var/lib/mumble-server
