@@ -18,8 +18,8 @@
           #- name: unarchive extra packages
           #  unarchive:
           #          remote_src: true
-          #          src: "{{ CSGO_HOME }}/{{ item | basename }}"
-          #          dest: "{{ CSGO_HOME }}"
+          #          src:  "{{ L4D2_HOME }}/{{ item | basename }}"
+          #          dest: "{{ L4D2_HOME }}"
           #  with_items: "{{csgo_extras}}"
           #  ignore_errors: true
 
