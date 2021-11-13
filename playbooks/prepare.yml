@@ -1,6 +1,8 @@
 ---
 - hosts: all localhost
   become: true
+  vars_files:
+        - host_vars/electrixx-server.yml
   pre_tasks:
         - name: add architecture i386
           shell: dpkg --add-architecture i386
@@ -29,8 +31,9 @@
 
         - name: create user gamemaster
           user:
-                name: gamemaster
-                password: '$6$t01fm3ejrt$eaV74WsYdhOhOABwyVPoxOYIAQHnA/2oFDUw47wTC5qYL4u2Rmp4OW4m..1sN0vBwSYCmemRvTmd2AeBGg8Zk.'
+                name: "{{ gamemaster_user }}"
+                password: "{{ gamemaster_password | password_hash('sha512') }}"
+                shell: /bin/bash
                 update_password: on_create
           tags:
                 - user
