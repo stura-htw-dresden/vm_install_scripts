@@ -1,0 +1,23 @@
+---
+- hosts: all localhost
+  become: true
+  vars:
+        ansible_distribution_release: buster
+  vars_files:
+        - host_vars/electrixx-server.yml
+  pre_tasks:
+        - name: Create private key (RSA,4096) with password protection
+          community.crypto.openssl_privatekey:
+                path: "{{ murmur_sslkey }}"
+                #type: X25519
+        - name: Create simple self-signed certificate
+          community.crypto.x509_certificate:
+                path: "{{ murmur_sslcert }}"
+                privatekey_path: "{{ murmur_sslkey }}"
+                selfsigned_not_before: "{{ electrixx_begin }}"
+                selfsigned_not_after: "{{ electrixx_end }}"
+                provider: selfsigned
+  roles:
+        - { role: geerlingguy.nodejs }
+#        - { role: systemli.letsencrypt }
+        - { role: systemli.mumble }
