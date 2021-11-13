@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: all localhost
   become: true
   pre_tasks:
         - name: add architecture i386
@@ -10,7 +10,7 @@
                   name: "{{ item }}"
                   state: latest
                   update_cache: true
-          with_items:
+          loop:
                   - libx11-6:i386
                   - libxext6:i386
                   - libgl1-mesa-dri:i386
@@ -26,3 +26,11 @@
                   - winbind
                   - espeak
                   - unzip
+
+        - name: create user gamemaster
+          user:
+                name: gamemaster
+                password: '$6$t01fm3ejrt$eaV74WsYdhOhOABwyVPoxOYIAQHnA/2oFDUw47wTC5qYL4u2Rmp4OW4m..1sN0vBwSYCmemRvTmd2AeBGg8Zk.'
+                update_password: on_create
+          tags:
+                - user
