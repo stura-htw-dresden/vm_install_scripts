@@ -19,6 +19,23 @@
           tags:
                 - ansible
 
+        - name: install required packages
+          apt:
+                  name: "{{ item }}"
+                  state: latest
+                  update_cache: true
+          loop:
+                  - python-pip
+                  - openssh-server
+          tags:
+                  - python
+
+        - name: install python required
+          pip:
+                name: cryptography
+          tags:
+                - python
+
         - name: add architecture i386
           shell: dpkg --add-architecture i386
 
@@ -43,6 +60,8 @@
                   - winbind
                   - espeak
                   - unzip
+          tags:
+                - steam
 
         - name: create user gamemaster
           user:
@@ -52,6 +71,7 @@
                 update_password: on_create
           tags:
                 - user
+                - steam
   post_tasks:
         - name: install ansible new version
           apt:
