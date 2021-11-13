@@ -4,10 +4,25 @@
   vars_files:
         - host_vars/electrixx-server.yml
   pre_tasks:
+        - name: upgrade ansible
+          apt_repository:
+                repo: deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main
+                state: present
+                filename: ansible
+          tags:
+                - ansible
+
+        - name: import ansible repo key
+          apt_key:
+                id: 93C4A3FD7BB9C367
+                keyserver: keyserver.ubuntu.com
+          tags:
+                - ansible
+
         - name: add architecture i386
           shell: dpkg --add-architecture i386
 
-        - name: install required packeges
+        - name: install required packages
           apt:
                   name: "{{ item }}"
                   state: latest
@@ -37,3 +52,10 @@
                 update_password: on_create
           tags:
                 - user
+  post_tasks:
+        - name: install ansible new version
+          apt:
+                  name: ansible
+                  state: latest
+          tags:
+                - ansible
