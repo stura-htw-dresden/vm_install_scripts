@@ -1,0 +1,22 @@
+---
+- hosts: all localhost
+  become: true
+  vars:
+        ansible_distribution_release: buster
+  vars_files:
+        - host_vars/electrixx-server.yml
+  pre_tasks:
+        - name: Create private key (RSA,4096) with password protection
+          community.crypto.openssl_privatekey:
+                path: "{{ vsftpd_key_file }}"
+                #type: X25519
+        - name: Create simple self-signed certificate
+          community.crypto.x509_certificate:
+                path: "{{ vsftpd_cert_file }}"
+                privatekey_path: "{{ vsftpd_key_file }}"
+                selfsigned_not_before: "{{ electrixx_begin }}"
+                selfsigned_not_after: "{{ electrixx_end }}"
+                provider: selfsigned
+  roles:
+#        - { role: systemli.letsencrypt }
+        - { role: weareinteractive.vsftpd }
