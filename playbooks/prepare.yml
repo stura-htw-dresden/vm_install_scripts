@@ -25,7 +25,7 @@
                   state: latest
                   update_cache: true
           loop:
-                  - python-pip
+                  - python3-pip
                   - openssh-server
           tags:
                   - python
@@ -33,6 +33,7 @@
         - name: install python required
           pip:
                 name: cryptography
+                executable: pip3
           tags:
                 - python
 
