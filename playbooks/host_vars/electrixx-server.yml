@@ -1,2 +1,21 @@
 gamemaster_user: gamemaster
 gamemaster_password: foobarbuz
+electrixx_begin: "202111191300Z"
+electrixx_end: "202111212000Z"
+elektrixx_version: Lambda
+
+# mumble
+murmur_welcometext: "Welcome on Electrixx Lambda mumble server!"
+murmur_uname: "{{ lookup('pipe', 'uname -n') }}"
+# name for root channel and entry in mumble main server list
+murmur_registername: "{{ gamemaster_user }}"
+  
+murmur_registerpassword: "{{ gamemaster_password | password_hash('sha512') }}"
+# regexp to validate channel or usernames
+murmur_channelname: "Electrixx$"
+  
+murmur_username: "Electrixx$"
+
+murmur_sslcert: "/etc/ssl/mumble-server-cert.pem"
+murmur_sslkey: "/etc/ssl/mumble-server-key.pem"
+murmur_sslca: "/etc/ssl/letsencrypt_chain.pem"
