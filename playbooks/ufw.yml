@@ -3,5 +3,7 @@
 
 - hosts: all localhost
   become: true
+  vars_files:
+         - host_vars/electrixx-server.yml
   roles:
     - weareinteractive.ufw
