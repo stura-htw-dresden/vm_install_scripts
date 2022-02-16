@@ -1,0 +1,10 @@
+---
+cjdns_version: cjdns-v21.1
+cjdns_requirements:
+        - nodejs
+        - git
+        - build-essential
+        - python2.7
+
+cjdns_admin:
+        password: "{{ lookup('password', '/dev/null') }}"

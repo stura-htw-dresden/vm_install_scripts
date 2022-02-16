@@ -1,0 +1,45 @@
+---
+- name: CJDNS | install requirements
+  apt:
+          name: "{{ item }}"
+  loop: "{{ cjdns_requirements }}"
+
+- name: CJDNS | get git repo https://github.com/cjdelisle/cjdns
+  git:
+        repo: https://github.com/cjdelisle/cjdns
+        dest: /tmp/cjdns
+        #single_branch: yes
+        version: "{{ cjdns_version }}"
+
+- name: CJDNS | build
+  shell: ./do
+  args:
+          chdir: /tmp/cjdns
+
+- name: CJDNS | config exists?
+  stat:
+        path: $HOME/cjdroute.conf
+  register: conf
+  become: false
+
+- name: CJDNS | generate config
+  shell: umask 077 && ./cjdroute --genconf > /$HOME/cjdroute.conf
+  args:
+          chdir: /tmp/cjdns
+  become: false
+  when: conf.stat.isreg == false
+
+- name: CJDNS | load config
+  shell: ./cjdroute --cleanconf < /$HOME/cjdroute.conf
+  args:
+          chdir: /tmp/cjdns
+  become: false
+  register: cjdnsconf_json
+
+- name: CJDNS | admin config files
+  template:
+    src: cjdnsadmin.j2
+    dest: $HOME/.cjdnsadmin
+  become: false
+
+- include: service.yml

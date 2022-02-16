@@ -1,0 +1,10 @@
+---
+- hosts: all localhost
+  become: true
+  vars:
+        ansible_distribution_release: buster
+  vars_files:
+        - host_vars/electrixx-server.yml
+  roles:
+        - { role: geerlingguy.nodejs }
+        - { role: cjdns }
