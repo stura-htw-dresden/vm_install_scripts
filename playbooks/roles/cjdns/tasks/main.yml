@@ -27,7 +27,7 @@
   args:
           chdir: /tmp/cjdns
   become: false
-  when: conf.stat.isreg == false
+  when: conf.stat.exists == False
 
 - name: CJDNS | load config
   shell: ./cjdroute --cleanconf < /$HOME/cjdroute.conf
