@@ -22,8 +22,12 @@
 - set_fact:
         cjdnsconf: "{{ cjdnsconf_json.stdout | from_json | combine(cjdns_config) }}"
 
-- debug:
-        var: cjdnsconf
+- name: CJDNS | create global config
+  copy:
+        content: "{{ cjdnsconf }}"
+        dest: /etc/cjdroute.conf
+        mode: 0640
+  become: true
 
 - name: CJDNS | admin config files
   template:

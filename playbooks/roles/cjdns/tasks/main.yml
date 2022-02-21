@@ -16,6 +16,13 @@
   args:
           chdir: /tmp/cjdns
 
+- name: CJDNS | create global exe
+  copy:
+          remote_src: true
+          src: /tmp/cjdns/cjdroute
+          dest: /usr/bin/cjdroute
+          mode: 0750
+
 - include: config.yml
   ignore_errors: true
   become: false
