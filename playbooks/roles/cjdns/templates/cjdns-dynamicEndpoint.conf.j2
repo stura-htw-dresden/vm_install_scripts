@@ -1,0 +1,7 @@
+{% for dynamicEnpoint in cjdns_dynamicEnpoints %}
+[{{ dynamicEnpoint.pubKey }}]
+hostname: {{dynamicEndpoint.hostname }}
+port: {{dynamicEndpoint.port }}
+password: {{dynamicEndpoint.password }}
+
+{% endfor %}

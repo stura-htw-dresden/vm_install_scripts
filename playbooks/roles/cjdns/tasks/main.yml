@@ -23,8 +23,12 @@
           dest: /usr/bin/cjdroute
           mode: 0750
 
+
 - include: config.yml
   ignore_errors: true
   become: false
+
+- include: dynamicEndpoint.yml
+  when: cjdns_dynamicEnpoints is defined
 
 - include: service.yml
