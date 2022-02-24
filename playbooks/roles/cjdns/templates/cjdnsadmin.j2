@@ -1,6 +1,6 @@
 {
     "addr": "{{ cjdns_admin['addr'] }}",
-    "port": "{{ cjdns_admin['port'] }}",
+    "port": "{{ cjdns_admin['port'] | int}}",
     "password": "{{ cjdns_admin['password'] }}"
 }
 
