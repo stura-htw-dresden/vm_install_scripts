@@ -29,6 +29,6 @@
   become: false
 
 - include: dynamicEndpoint.yml
-  when: cjdns_dynamicEnpoints is defined
+  when: cjdns_dynamicEndpoints is defined
 
 - include: service.yml

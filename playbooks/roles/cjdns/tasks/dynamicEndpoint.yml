@@ -1,12 +1,12 @@
 ---
 - name: CJDNS | copy dynamicEndpoint.py
   copy:
-          remote_src: true
           src: /tmp/cjdns/contrib/python/dynamicEndpoints.py
           dest: $HOME/dynamicEndpoint.py
   become: false
 
-- name: CJDNS | create dynamicEnpoint config
+- name: CJDNS | create dynamicEndpoint config
   template:
           src: cjdns-dynamicEndpoint.conf.j2
           dest: $HOME/cjdns-dynamicEndpoint.conf
+  become: false
