@@ -1,10 +1,23 @@
 ---
-- name: CJDNS | copy dynamicEndpoint.py
+- name: CJDNS | copy dynamicEndpoints.py
   copy:
-          src: /tmp/cjdns/contrib/python/dynamicEndpoints.py
-          dest: $HOME/dynamicEndpoint.py
+          src: "/tmp/cjdns/contrib/python/{{ item }}"
+          dest: "$HOME/{{ item}}"
   become: false
+  loop:
+          - dynamicEndpoints.py
 
+- name: CJDNS | copy cjdnsadmin tools
+  copy:
+          src: "/tmp/cjdns/contrib/python/{{ item.name }}"
+          dest: "$HOME/"
+          directory_mode: "{{ item.directory_mode }}"
+          mode: "{{ item.mode }}"
+  become: false
+  loop:
+          - name: cjdnsadmin
+            directory_mode: '0770'
+            mode: '0754'
 - name: CJDNS | create dynamicEndpoint config
   template:
           src: cjdns-dynamicEndpoint.conf.j2
