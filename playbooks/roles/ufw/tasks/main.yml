@@ -1,0 +1,7 @@
+---
+- name: append nat rule at before.rules
+  blockinfile:
+    insertafter: EOF
+    path: /etc/ufw/before.rules
+    block: "{{ lookup('template', 'append_before.rules.j2') }}"
+    marker: ""

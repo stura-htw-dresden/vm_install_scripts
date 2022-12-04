@@ -7,3 +7,4 @@
          - host_vars/electrixx-server.yml
   roles:
     - weareinteractive.ufw
+    - ufw

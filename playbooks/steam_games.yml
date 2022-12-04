@@ -5,7 +5,7 @@
   vars_files:
           - host_vars/electrixx-server.yml
   vars:
-          - SERVER_HOME: "{{ ansible_env['HOME'] }}/server"
+          - SERVER_HOME: "{{ ansible_env.HOME }}/server"
           - STEAM_HOME: "{{ SERVER_HOME }}/steam"
   pre_tasks:
 

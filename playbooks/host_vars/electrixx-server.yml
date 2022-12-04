@@ -1,8 +1,17 @@
 gamemaster_user: gamemaster
 gamemaster_password: foobarbuz
-electrixx_begin: "202111191300Z"
-electrixx_end: "202111212000Z"
-electrixx_version: Lambda
+electrixx_begin: "202212041200Z"
+electrixx_end: "202212021600Z"
+electrixx_version: My
+
+GATEWAY_IP: 10.57.82.1
+INTERNAL_IP: 10.57.82.2
+EXTERNAL_IP: 0.0.0.0
+
+GATEWAY_INTERFACE: enp2s0f1
+# with dialin ppp0 is EXTERNAL_INTERFACE
+EXTERNAL_INTERFACE: enp2s0f0
+INTERNAL_INTERFACE: enp3s0
 
 # mumble
 murmur_welcometext: "Welcome on Electrixx {{ electrixx_version }} mumble server!"
@@ -35,6 +44,13 @@ vsftpd_config:
         pasv_min_port: 10000
         pasv_max_port: 10100
         ftpd_banner: "Welcome on Electrixx {{ electrixx_version }} FTP Server."
+        allow_writeable_chroot: true
+        xferlog_file: "/var/log/vsftpd.log"
+        anon_upload_enable: true
+        anon_root: "/home/ftpuser/upload"
+        anon_mkdir_write_enable: true
+        anon_other_write_enable: true
+        dirmessage_enable: true
 
 vsftpd_users:
        - username: ftpuser
@@ -43,28 +59,31 @@ vsftpd_users:
 
 # DHCPD
 # Configuration settings for the daemon.
-dhcpd_ipv4_interface: "{{ ansible_default_ipv4.interface | default('enp2s0') }}"
+dhcpd_ipv4_interface: "{{ INTERNAL_INTERFACE }}"
 
 # Setting applicable for the global scope.
 dhcpd_default_lease_time: 600
 dhcpd_max_lease_time: 7200
 dhcpd_subnet_mask: 255.255.255.0
-dhcpd_broadcast_address: 10.0.2.255
-dhcpd_routers: 10.0.2.254
-dhcpd_domain_name_servers: 141.56.1.1, 141.56.1.2
+dhcpd_broadcast_address: 10.57.82.255
+dhcpd_routers: "{{ GATEWAY_IP }}"
+dhcpd_domain_name_servers:
+    - 9.9.9.9
+    - 8.8.8.8
 dhcpd_domain_search: "{{electrixx_version}}.electrixx.lan"
 
 # The image to serve for PXE booting.
 #dhcpd_filename: pxelinux.0
 # Where the image can be downloaded from.
-dhcpd_next_server: 10.0.2.254
+dhcpd_next_server: "{{ GATEWAY_IP }}"
 
 # DHCP works with subnets, a list containing properties per subnet.
+subnetmask: 24
 dhcpd_subnets:
-  - network: 10.0.2.0
+  - network: 10.57.82.0
     netmask: 255.255.255.0
-    range_start: 10.0.2.1
-    range_end: 10.0.2.100
+    range_start: 10.57.82.10
+    range_end: 10.57.82.200
 
 
 
@@ -87,6 +106,11 @@ ufw_rules:
   - rule: allow
     name: OpenSSH
     proto: tcp
+    to_ip: "{{ INTERNAL_IP }}"
+  - rule: allow
+    name: OpenSSH
+    proto: tcp
+    to_ip: "{{ EXTERNAL_IP }}"
   # Allow vsftpd
   - rule: allow
     to_port: 21
@@ -95,10 +119,22 @@ ufw_rules:
   - rule: allow
     to_port: "{{ vsftpd_config.pasv_min_port }}:{{ vsftpd_config.pasv_max_port }}"
     proto: tcp
+    to_ip: "{{ INTERNAL_IP }}"
   # Allow mumble
   - rule: allow
     to_port: "{{ murmur_port }}"
     proto: tcp
+    to_ip: "{{ INTERNAL_IP }}"
   # Allow all access to tcp port 80,443
   - rule: allow
     name: WWW Full
+    to_ip: "{{ INTERNAL_IP }}"
+  # Steam CS GO
+  - rule: allow
+    proto: tcp
+    to_port: 27015:27030,27036,2703
+    to_ip: "{{ INTERNAL_IP }}"
+  - rule: allow
+    proto: udp
+    to_port: 4380,27000:27031,27036
+    to_ip: "{{ INTERNAL_IP }}"

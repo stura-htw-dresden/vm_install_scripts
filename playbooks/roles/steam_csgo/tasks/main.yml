@@ -2,11 +2,14 @@
 - name: Install CSGO
   shell: "{{ steamcmd_exe }} {{ csgo_steamcmd_args }}"
 
-- name: install server.cfg
-  template:
-          backup: true
-          src: server.cfg.j2
-          dest: "{{ csgo_server_cfg }}"
+ - name: copy gameconfigs
+   templates:
+   	src: "{{ item }}.j2"
+   	dest: "{{csgo_server_cfg_home}}/{{ item}}"
+   loop:
+   	- esl2on2.cfg
+   	- esl3on3.cfg
+   	- esl5on5.cfg
 
 - name: download extra packages
   get_url:

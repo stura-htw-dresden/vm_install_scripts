@@ -1,0 +1,12 @@
+
+host elektrixx-gateway {
+  hardware ethernet {{ ansible_facts[GATEWAY_INTERFACE]['macaddress'] }};
+  fixed-address {{ GATEWAY_IP }};
+  server-name "gateway.elektrixx.lan";
+}
+
+host elektrixx-server {
+  hardware ethernet {{ ansible_facts[INTERNAL_INTERFACE]['macaddress'] }};
+  fixed-address {{ INTERNAL_IP }};
+  server-name "server.elektrixx.lan";
+}
