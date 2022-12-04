@@ -5,3 +5,16 @@
     path: /etc/ufw/before.rules
     block: "{{ lookup('template', 'append_before.rules.j2') }}"
     marker: ""
+    
+ - name:  ufw net/ipv4/ip_forward=1
+   lineinfile:
+   	firstmatch: true
+     	path: /etc/ufw/sysctl.conf
+     	line: net/ipv4/ip_forward=1
+     	regexp: '^#net/ipv4/ip_forward=1'
+     	
+ - name: sysctl net.ipv4.ip_forward
+   ansible.posix.sysctl:
+   	name: net.ipv4.ip_forward
+    	value: '1'
+    	sysctl_set: yes
