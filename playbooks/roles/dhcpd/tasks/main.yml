@@ -5,3 +5,4 @@
     path: /etc/dhcp/dhcpd.conf
     block: "{{ lookup('template', 'append_dhcpd.conf.j2') }}"
     marker: ""
+  notify: restart dhcpd

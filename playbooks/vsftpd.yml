@@ -20,4 +20,3 @@
   roles:
 #        - { role: systemli.letsencrypt }
         - { role: weareinteractive.vsftpd }
-        - { role: vsftpd }

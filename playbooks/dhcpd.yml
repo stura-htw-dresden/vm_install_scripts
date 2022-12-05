@@ -8,3 +8,4 @@
 
   roles:
     - role: robertdebock.dhcpd
+    - role: dhcpd

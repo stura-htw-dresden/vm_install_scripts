@@ -1,7 +1,9 @@
+
+COMMIT
+
 # NAT table rules
 *nat
 :POSTROUTING ACCEPT [0:0]
 
 # Forward traffic through uplink - Change to match you out-interface
 -A POSTROUTING -s {{ dhcpd_subnets[0].network }}/{{ subnetmask }} -o {{ EXTERNAL_INTERFACE }} -j MASQUERADE
-COMMIT
