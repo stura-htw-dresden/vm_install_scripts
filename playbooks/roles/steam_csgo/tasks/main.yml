@@ -2,27 +2,27 @@
 - name: Install CSGO
   shell: "{{ steamcmd_exe }} {{ csgo_steamcmd_args }}"
 
- - name: copy gameconfigs
-   templates:
-   	src: "{{ item }}.j2"
-   	dest: "{{csgo_server_cfg_home}}/{{ item}}"
-   loop:
-   	- esl2on2.cfg
-   	- esl3on3.cfg
-   	- esl5on5.cfg
+- name: copy gameconfigs
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{csgo_server_cfg_home}}/{{ item}}"
+  loop:
+    - esl2on2.cfg
+    - esl3on3.cfg
+    - esl5on5.cfg
 
 - name: download extra packages
   get_url:
-          url: "{{ item }}"
-          dest: "{{ CSGO_HOME }}/"
+    url: "{{ item }}"
+    dest: "{{ CSGO_HOME }}/"
   with_items: "{{csgo_extras }}"
   ignore_errors: true
 
 - name: unarchive extra packages
   unarchive:
-          remote_src: true
-          src: "{{ CSGO_HOME }}/{{ item | basename }}"
-          dest: "{{ CSGO_HOME }}"
+    remote_src: true
+    src: "{{ CSGO_HOME }}/{{ item | basename }}"
+    dest: "{{ CSGO_HOME }}"
   with_items: "{{csgo_extras}}"
   ignore_errors: true
 
