@@ -1,17 +1,13 @@
 gamemaster_user: gamemaster
 gamemaster_password: foobarbuz
-electrixx_begin: "202212041200Z"
-electrixx_end: "202212021600Z"
-electrixx_version: My
+electrixx_begin: "202305121200Z"
+electrixx_end: "202305141600Z"
+electrixx_version: Ny
 
-GATEWAY_INTERFACE: enp2s0f1
+GATEWAY_INTERFACE: enp3s4f1
 # with dialin ppp0 is EXTERNAL_INTERFACE
-EXTERNAL_INTERFACE: enp2s0f0
-INTERNAL_INTERFACE: enp3s0
-
-
-
-
+EXTERNAL_INTERFACE: enp3s4f0
+INTERNAL_INTERFACE: enp3s4f1
 
 
 GATEWAY_IP: 10.57.82.1
