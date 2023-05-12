@@ -10,6 +10,8 @@
     - esl2on2.cfg
     - esl3on3.cfg
     - esl5on5.cfg
+  tags:
+    - csgoconfig
 
 - name: download extra packages
   get_url:
