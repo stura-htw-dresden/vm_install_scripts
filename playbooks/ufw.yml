@@ -8,3 +8,17 @@
   roles:
     - weareinteractive.ufw
     - ufw
+    
+  post_tasks:
+    - name: activated FORWADING
+      copy:
+        content: |
+          #! /usr/bin/env bash
+          
+          sudo iptables -t nat -A POSTROUTING -o "{{ EXTERNAL_INTERFACE }}" -j MASQUERADE
+          sudo iptables -A FORWARD -i "{{ GATEWAY_INTERFACE }}" -j ACCEPT
+        dest: "{{ lookup('env', 'HOME') }}/Dokumente/activate_ipforwarding.sh"
+        mode: 0775
+      become: false
+      tags:
+        - forwarding
