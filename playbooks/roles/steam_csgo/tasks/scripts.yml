@@ -1,9 +1,12 @@
- ---
- - name: copy helper scripts
-   template:
-   	src: "{{ item }}.j2"
-   	dest: "/home/gamemaster/{{item}}"
-   loop:
-	- GAMESERVER.sh
-	- GAMEUPGRADE.sh
-   become_user: gamemaster
+---
+- name: copy helper scripts
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ lookup('env', 'HOME') }}/{{item}}"
+  loop:
+    - GAMESERVER.sh
+    - GAMEUPGRADE.sh
+  become_user: "{{ gamemaster_user }}"
+  tags:
+    - csgo
+    - helper

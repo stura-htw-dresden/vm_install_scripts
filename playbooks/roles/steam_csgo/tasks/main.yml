@@ -26,6 +26,8 @@
   with_items: "{{csgo_extras}}"
   ignore_errors: true
 
+- include: scripts.yml
+
 - debug:
         msg: '
         vim addons/sourcemod/configs/pugsetup/maps.txt
