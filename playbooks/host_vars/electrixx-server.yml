@@ -101,7 +101,7 @@ ufw_config:
   IPT_MODULES: ""
 ufw_rules:
   # Set loggin
-  - logging: "full"
+  - logging: "low"
   # Allow OpenSSH
   - rule: allow
     name: OpenSSH
