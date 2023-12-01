@@ -1,7 +1,7 @@
 // ESL - www.eslgaming.com
 // CS:GO 3on3/5on5 Ladder Config
 // 14.01.2016
-hostname "CSGO Server Elektrixx My 5on5"
+hostname "CS2 Server Elektrixx {{ electrixx_version }} 3on3"
 
 ammo_grenade_limit_default 1
 ammo_grenade_limit_flashbang 2
@@ -78,10 +78,12 @@ mp_startmoney 800                       	// amount of money each player gets whe
 mp_teamcashawards 1				// Teams can earn money by performing in-game actions
 mp_timelimit 0                           	// game time per map in minutes
 mp_tkpunish 0					// Will a TK'er be punished in the next round?  {0=no,  1=yes}
-mp_warmuptime 1					// If true, there will be a warmup period/round at the start of each match to allow
 mp_weapons_allow_map_placed 1             	// If this convar is set, when a match starts, the game will not delete weapons placed in the map.
 mp_weapons_allow_zeus 1				// Determines whether the Zeus is purchasable or not.
 mp_win_panel_display_time 15	                // The amount of time to show the win panel between matches / halfs
+mp_overtime_enable 1
+
+
 
 spec_freeze_time 2.0                            // Time spend frozen in observer freeze cam.
 spec_freeze_panel_extended_time 0               // Time spent with the freeze panel still up after observer freeze cam is done.
@@ -108,7 +110,7 @@ sv_gameinstructor_disable 1		        // Force all clients to disable their game 
 sv_ignoregrenaderadio 0                         // Turn off Fire in the hole messages
 sv_kick_players_with_cooldown 0                 // (0: do not kick; 1: kick Untrusted players; 2: kick players with any cooldown)
 sv_kick_ban_duration 0                          // How long should a kick ban from the server should last (in minutes)
-sv_lan 0                                        // Server is a lan server ( no heartbeat, no authentication, no non-class C addresses )
+sv_lan 1                                        // Server is a lan server ( no heartbeat, no authentication, no non-class C addresses )
 sv_log_onefile 0				// Log server information to only one file.
 sv_logbans 1					// Log server bans in the server logs.
 sv_logecho 1					// Echo log information to the console.
@@ -127,5 +129,6 @@ sv_pure_trace 0					// If set to 1, the server will print a message whenever a c
 sv_spawn_afk_bomb_drop_time 30                 	// Players that spawn and don't move for longer than sv_spawn_afk_bomb_drop_time (default 15 seconds) will automatically drop the bomb.
 sv_steamgroup_exclusive 0                     	// If set, only members of Steam group will be able to join the server when it's empty, public people will be able to join the server only if it has players.
 sv_voiceenable 0
+rcon_password "{{ cs2_rcon_password }}"
 
 say "> ESL CS:GO 3on3/5on5 Ladder Config loaded - 14.01.2016<"

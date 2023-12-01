@@ -8,5 +8,5 @@
     - GAMEUPGRADE.sh
   become_user: "{{ gamemaster_user }}"
   tags:
-    - csgo
+    - cs2
     - helper

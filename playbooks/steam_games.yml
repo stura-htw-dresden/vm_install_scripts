@@ -39,5 +39,5 @@
             - 'VAGRANT'
   roles:
        - role: steam
-       - role: steam_csgo
+       - role: steam_cs2
        - role: steam_l4d2

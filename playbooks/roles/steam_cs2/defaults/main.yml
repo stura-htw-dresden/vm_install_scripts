@@ -1,0 +1,6 @@
+---
+CS2_HOME: "{{ STEAM_HOME }}/cs2"
+cs2_steamcmd_args: +login anonymous +force_install_dir "{{ CS2_HOME }}" +app_update "{{ cs2_app_update }}" +quit
+cs2_app_update: 730
+cs2_server_cfg_home: "{{ CS2_HOME }}/cs2/cfg"
+cs2_rcon_password: "{{ gamemaster_password }}"

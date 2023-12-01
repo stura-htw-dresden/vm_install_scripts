@@ -1,0 +1,30 @@
+---
+- name: Install CS2
+  shell: "{{ steamcmd_exe }} {{ cs2_steamcmd_args }}"
+
+- name: copy gameconfigs
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{cs2_server_cfg_home}}/{{ item}}"
+  loop:
+    - esl2on2.cfg
+    - esl3on3.cfg
+    - esl5on5.cfg
+  tags:
+    - cs2config
+
+- include: scripts.yml
+
+- debug:
+        msg: '
+        vim addons/sourcemod/configs/pugsetup/maps.txt
+
+        TIP: # lösche de_nuke 2015-12-04
+
+        Server starten
+
+        cd $HOME/steam/server/cs2
+        tmux
+        ./srcds_run -game cs2 -usercon -console -tickrate 64\
+           +game_type 0 +game_mode 1 +map de_dust2 +exec server.cfg
+        '
