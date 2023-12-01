@@ -1,8 +1,8 @@
 gamemaster_user: gamemaster
 gamemaster_password: foobarbuz
-electrixx_begin: "202305121200Z"
-electrixx_end: "202305141600Z"
-electrixx_version: Ny
+electrixx_begin: "202312011200Z"
+electrixx_end: "202312031600Z"
+electrixx_version: invite
 
 GATEWAY_INTERFACE: enp3s4f1
 # with dialin ppp0 is EXTERNAL_INTERFACE
@@ -69,7 +69,7 @@ dhcpd_subnet_mask: 255.255.255.0
 dhcpd_broadcast_address: 10.57.82.255
 dhcpd_routers: "{{ GATEWAY_IP }}"
 dhcpd_domain_name_servers: 9.9.9.9, 8.8.8.8
-dhcpd_domain_search: "{{electrixx_version}}.electrixx.lan"
+dhcpd_domain_search: "{{electrixx_version}}.electrixx.lan,electrixx.lan"
 
 # The image to serve for PXE booting.
 #dhcpd_filename: pxelinux.0
@@ -85,7 +85,11 @@ dhcpd_subnets:
     range_start: 10.57.82.10
     range_end: 10.57.82.200
 
-
+# DHCP works with extra Hosts
+dhcpd_hosts:
+  - server_name: "bf3.{{ electrixx_version }}.electrixx.lan"
+    hardware_ethernet: "04:7c:16:B8:0c:88"
+    fixed_address: "10.57.82.3"
 
 # UFW
 # https://gist.github.com/kimus/9315140
