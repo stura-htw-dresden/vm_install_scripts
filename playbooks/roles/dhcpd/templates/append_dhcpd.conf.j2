@@ -10,3 +10,10 @@ host elektrixx-server {
   fixed-address {{ INTERNAL_IP }};
   server-name "server.elektrixx.lan";
 }
+{% for host in dhcpd_hosts %}
+host {{ host.server_name }} {
+  hardware ethernet {{ host.hardware_ethernet }};
+  fixed-address {{ host.fixed_address }};
+  server-name "{{ host.server_name }}";
+}
+{% endfor %}
