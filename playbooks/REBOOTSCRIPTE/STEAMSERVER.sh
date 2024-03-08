@@ -1,4 +1,4 @@
 #! /bin/bash
 
 
-sudo -i -u gamemaster /home/gamemaster/GAMESERVER.sh
+sudo -i -u gamemaster bash -c /home/gamemaster/GAMESERVER.sh
