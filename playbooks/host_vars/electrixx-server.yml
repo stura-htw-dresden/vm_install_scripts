@@ -131,12 +131,10 @@ ufw_rules:
   - rule: allow
     name: WWW Full
     to_ip: "{{ INTERNAL_IP }}"
-  # Steam CS GO
+  # Steam CS Source 2
   - rule: allow
     proto: tcp
-    to_port: 27015:27030,27036,2703
-    to_ip: "{{ INTERNAL_IP }}"
+    to_port: 27015:27036
   - rule: allow
     proto: udp
-    to_port: 4380,27000:27031,27036
-    to_ip: "{{ INTERNAL_IP }}"
+    to_port: 27000:27036
