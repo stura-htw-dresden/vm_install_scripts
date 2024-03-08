@@ -1,8 +1,8 @@
 gamemaster_user: gamemaster
 gamemaster_password: foobarbuz
-electrixx_begin: "202312011200Z"
-electrixx_end: "202312031600Z"
-electrixx_version: invite
+electrixx_begin: "202403081200Z"
+electrixx_end: "202403101600Z"
+electrixx_version: Xi
 
 GATEWAY_INTERFACE: enp3s4f1
 # with dialin ppp0 is EXTERNAL_INTERFACE
