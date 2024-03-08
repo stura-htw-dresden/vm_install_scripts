@@ -3,8 +3,8 @@
 CS2_HOME="{{CS2_HOME}}"
 IP="{{ INTERNAL_IP }}"
 
-	tmux  new-session -s CS2 -n esl5on51 -d "${CS2_HOME}/game/bin/linuxsteamrt64/cs2 -dedicated -usercon -console -tickrate 128 +game_type 0 +ip ${IP} -port 27015 +game_alias competitive +sv_lan 0 +map de_dust2 +exec esl5on5.cfg"
-	tmux  new-window -t CS2:1 -n esl5on52   "${CS2_HOME}/game/bin/linuxsteamrt64/cs2 -dedicated -usercon -console -tickrate 128 +game_type 0 +ip ${IP} -port 27016 +game_alias competitive +sv_lan 0 +map de_dust2 +exec esl5on5.cfg"
-	tmux  new-window -t CS2:2 -n esl5on53   "${CS2_HOME}/game/bin/linuxsteamrt64/cs2 -dedicated -usercon -console -tickrate 128 +game_type 0 +ip ${IP} -port 27017 +game_alias competitive +sv_lan 0 +map de_dust2 +exec esl5on5.cfg"
+	tmux  new-session -s CS2 -n esl5on51 -d "${CS2_HOME}/game/bin/linuxsteamrt64/cs2 -dedicated -usercon -console -secure -dev -ip ${IP} -port 27015 +game_alias competitive +sv_lan 0 +map de_dust2 +exec esl5on5.cfg"
+	tmux  new-window -t CS2:1 -n esl5on52   "${CS2_HOME}/game/bin/linuxsteamrt64/cs2 -dedicated -usercon -console -secure -dev -ip ${IP} -port 27016 +game_alias competitive +sv_lan 0 +map de_dust2 +exec esl5on5.cfg"
+	tmux  new-window -t CS2:2 -n esl5on53   "${CS2_HOME}/game/bin/linuxsteamrt64/cs2 -dedicated -usercon -console -secure -dev -ip ${IP} -port 27017 +game_alias competitive +sv_lan 0 +map de_dust2 +exec esl5on5.cfg"
 	tmux a -t CS2
 
